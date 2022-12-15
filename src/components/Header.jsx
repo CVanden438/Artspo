@@ -12,6 +12,7 @@ const Header = () => {
       <div className='flex gap-x-6'>
         <Link to='/browse'>Browse</Link>
         <Link to={`/profile/${user.uid}`}>Profile</Link>
+        <Link to={'/upload'}>Upload</Link>
         <button
           onClick={user ? signOut : signIn}
           className='bg-green-800 pl-2 pr-2 text-white'

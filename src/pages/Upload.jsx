@@ -8,13 +8,15 @@ const initialState = {
 }
 const Upload = () => {
   const [input, setInput] = useState(initialState)
+  const [file, setFile] = useState('')
   const { user } = useAuthContext()
   const { addArt } = useArtContext()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addArt(input)
+    addArt(input, file)
     setInput(initialState)
+    setFile('')
   }
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
@@ -35,6 +37,12 @@ const Upload = () => {
           name='description'
           value={input.description}
           onChange={handleChange}
+        />
+        <input
+          type='file'
+          name='filename'
+          //value={file}
+          onChange={(e) => setFile(e.target.files[0])}
         />
         <button type='submit'>Add Art</button>
       </form>

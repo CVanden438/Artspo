@@ -16,20 +16,27 @@ import {
   arrayUnion,
   arrayRemove,
 } from 'firebase/firestore'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useAuthContext } from './auth'
 
 const ArtContext = React.createContext()
 
 const ArtProvider = ({ children }) => {
   const db = getFirestore(app)
+  const storage = getStorage()
   const { user } = useAuthContext()
 
-  async function addArt(input) {
+  async function addArt(input, file) {
+    await uploadArt(file)
+    const artRef = String(ref(storage, 'images/' + file.name))
+    const artURL = await getDownloadURL(ref(storage, 'images/' + file.name))
+    const artURLString = String(artURL)
     await addDoc(collection(db, 'art'), {
       title: input.title,
       description: input.description,
       uid: user.uid,
       likeCount: 0,
+      image: artURLString,
     })
   }
 
@@ -62,8 +69,15 @@ const ArtProvider = ({ children }) => {
     }
   }
 
+  async function uploadArt(file) {
+    const artRef = ref(storage, 'images/' + file.name)
+    await uploadBytes(artRef, file)
+  }
+
   return (
-    <ArtContext.Provider value={{ likeArt, addArt, favouriteArt, removeFav }}>
+    <ArtContext.Provider
+      value={{ likeArt, addArt, favouriteArt, removeFav, uploadArt }}
+    >
       {children}
     </ArtContext.Provider>
   )
