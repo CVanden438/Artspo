@@ -27,9 +27,10 @@ const ArtProvider = ({ children }) => {
   const { user } = useAuthContext()
 
   async function addArt(input, file) {
-    await uploadArt(file)
-    const artRef = String(ref(storage, 'images/' + file.name))
-    const artURL = await getDownloadURL(ref(storage, 'images/' + file.name))
+    const path = `images/${user.uid}/${file.name}`
+    await uploadArt(file, path)
+    //const artRef = String(ref(storage, path))
+    const artURL = await getDownloadURL(ref(storage, path))
     const artURLString = String(artURL)
     await addDoc(collection(db, 'art'), {
       title: input.title,
@@ -40,43 +41,60 @@ const ArtProvider = ({ children }) => {
     })
   }
 
-  async function favouriteArt(d) {
-    const favRef = doc(db, 'art', d.id)
+  async function favouriteArt(id) {
+    const favRef = doc(db, 'art', id)
     const q = await getDoc(favRef)
     await updateDoc(favRef, {
       favourites: arrayUnion(user.uid),
     })
   }
-  async function removeFav(d) {
-    const favRef = doc(db, 'art', d.id)
+  async function removeFav(id) {
+    const favRef = doc(db, 'art', id)
     await updateDoc(favRef, {
       favourites: arrayRemove(user.uid),
     })
   }
-  async function likeArt(d) {
-    const artRef = collection(doc(db, 'art', d.id), 'likes')
+
+  async function addComment(d, user, comment) {
+    const commentRef = collection(doc(db, 'art', d), 'comments')
+    await addDoc(commentRef, {
+      text: comment,
+      uid: user.uid,
+      name: user.displayName,
+    })
+  }
+
+  async function likeArt(id) {
+    const artRef = collection(doc(db, 'art', id), 'likes')
     const hasLiked = await getDoc(doc(artRef, user.uid))
     if (!hasLiked.exists()) {
-      await updateDoc(doc(db, 'art', d.id), {
+      await updateDoc(doc(db, 'art', id), {
         likeCount: increment(1),
       })
       await setDoc(doc(artRef, user.uid), {})
     } else {
-      await updateDoc(doc(db, 'art', d.id), {
+      await updateDoc(doc(db, 'art', id), {
         likeCount: increment(-1),
       })
       await deleteDoc(doc(artRef, user.uid))
     }
   }
 
-  async function uploadArt(file) {
-    const artRef = ref(storage, 'images/' + file.name)
+  async function uploadArt(file, path) {
+    const artRef = ref(storage, path)
     await uploadBytes(artRef, file)
   }
 
   return (
     <ArtContext.Provider
-      value={{ likeArt, addArt, favouriteArt, removeFav, uploadArt }}
+      value={{
+        likeArt,
+        addArt,
+        favouriteArt,
+        removeFav,
+        uploadArt,
+        addComment,
+      }}
     >
       {children}
     </ArtContext.Provider>

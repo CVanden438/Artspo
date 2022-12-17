@@ -5,7 +5,7 @@ const ProfileFavourites = ({ favourites }) => {
   return (
     <div className='grid grid-cols-3'>
       {favourites?.docs.map((doc) => {
-        return <ArtCard key={doc.id} data={doc.data()} />
+        return <ArtCard key={doc.id} data={doc.data()} id={doc.id} />
       })}
     </div>
   )

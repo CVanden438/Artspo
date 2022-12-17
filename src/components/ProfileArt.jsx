@@ -18,7 +18,7 @@ const ProfileArt = ({ art }) => {
   return (
     <div className='grid grid-cols-5 gap-4'>
       {art?.docs.map((doc) => {
-        return <ArtCard key={doc.id} data={doc.data()} />
+        return <ArtCard key={doc.id} data={doc.data()} id={doc.id} />
       })}
     </div>
   )

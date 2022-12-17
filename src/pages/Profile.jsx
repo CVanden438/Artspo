@@ -4,7 +4,7 @@ import ArtModal from '../components/ArtModal'
 import ProfileCard from '../components/ProfileCard'
 import ProfileArt from '../components/ProfileArt'
 import ProfileFavourites from '../components/ProfileFavourites'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import {
   getFirestore,
   collection,
@@ -33,6 +33,7 @@ const Profile = () => {
       where('favourites', 'array-contains', params.user)
     )
   )
+
   // useCollection(query(collection(db,"art"),where()))
   // const favs = query(
   //   collectionGroup(db, 'favourites'),

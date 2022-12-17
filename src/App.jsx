@@ -5,6 +5,8 @@ import Landing from './pages/Landing'
 import Browse from './pages/Browse'
 import Profile from './pages/Profile'
 import Upload from './pages/Upload'
+import NotFound from './pages/NotFound'
+import ArtPage from './pages/ArtPage'
 function App() {
   return (
     <div className='h-screen'>
@@ -15,7 +17,9 @@ function App() {
             <Route path='browse' element={<Browse />} />
             <Route path='profile/:user' element={<Profile />} />
             <Route path='upload' element={<Upload />} />
+            <Route path='art/:art' element={<ArtPage />} />
           </Route>
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
