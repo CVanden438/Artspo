@@ -29,6 +29,8 @@ const ArtProvider = ({ children }) => {
   async function addArt(input, file) {
     const path = `images/${user.uid}/${file.name}`
     await uploadArt(file, path)
+    await addCatCount(input.category)
+    await addCatCount('all')
     //const artRef = String(ref(storage, path))
     const artURL = await getDownloadURL(ref(storage, path))
     const artURLString = String(artURL)
@@ -38,6 +40,16 @@ const ArtProvider = ({ children }) => {
       uid: user.uid,
       likeCount: 0,
       image: artURLString,
+      category: input.category,
+      date: new Date().toISOString(),
+      dateMS: new Date().getTime(),
+    })
+  }
+
+  async function addCatCount(cat) {
+    const catRef = doc(db, 'categories', cat)
+    await updateDoc(catRef, {
+      count: increment(1),
     })
   }
 
@@ -61,6 +73,7 @@ const ArtProvider = ({ children }) => {
       text: comment,
       uid: user.uid,
       name: user.displayName,
+      date: new Date().toISOString(),
     })
   }
 

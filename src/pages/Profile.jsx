@@ -54,19 +54,13 @@ const Profile = () => {
   // console.log('userFavs', userFavs)
   return (
     <div className='p-5 grid grid-cols-6 gap-4 bg-green-100'>
-      <div className='bg-red-200 flex flex-col items-center'>
+      <div className='bg-green-200 flex flex-col items-center'>
         <ProfileCard user={userValue} />
-        <button
-          className='p-2 bg-green-800 w-20 text-white font-bold'
-          onClick={() => setisModalOpen(true)}
-        >
-          Add Art
-        </button>
       </div>
-      <div className='bg-red-200 col-span-5'>
+      <div className='bg-green-200 col-span-5'>
         <ProfileFavourites favourites={userFavs} />
       </div>
-      <div className='col-span-6 bg-red-200'>
+      <div className='col-span-6 bg-green-200'>
         <ProfileArt art={value} />
         {isModalOpen && <ArtModal setisModalOpen={setisModalOpen} />}
       </div>
