@@ -4,6 +4,7 @@ import { useAuthContext } from '../firebase/auth'
 import { collection, getDocs, getFirestore } from 'firebase/firestore'
 import app from '../firebase/firebase.config'
 import { useCollectionOnce } from 'react-firebase-hooks/firestore'
+import Alert from '../components/Alert'
 const initialState = {
   title: '',
   description: '',
@@ -15,11 +16,10 @@ const Upload = () => {
   const [url, setURL] = useState('')
   const [alert, setAlert] = useState(false)
   const [alertType, setAlertType] = useState('success')
-  const { addArt } = useArtContext()
-  const db = getFirestore(app)
+  const { addArt, fileExists, db } = useArtContext()
   const catRef = collection(db, 'categories')
   const [value, loading, error] = useCollectionOnce(catRef)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (input.category === 'category') {
       return
@@ -28,13 +28,14 @@ const Upload = () => {
       return
     }
     try {
-      addArt(input, file)
+      await addArt(input, file)
       setInput(initialState)
       setFile('')
       setURL('')
       setAlert(true)
       setAlertType('success')
     } catch (error) {
+      console.log('error')
       setAlert(true)
       setAlertType('error')
     }
@@ -52,7 +53,6 @@ const Upload = () => {
       setURL('')
     }
   }
-  file && console.log(file)
   return (
     <div className='flex justify-center align-middle pt-20'>
       <div className='flex gap-x-6 p-6 justify-center bg-green-400 w-1/2'>
@@ -114,6 +114,8 @@ const Upload = () => {
                 : 'There was an error!'}
             </p>
           )}
+          {fileExists && <p className='bg-red-400'>File already exists!</p>}
+          {/* <Alert message={'test'} type={'error'} /> */}
         </form>
         <div className='bg-green-300 w-1/2 aspect-square'>
           Preview:

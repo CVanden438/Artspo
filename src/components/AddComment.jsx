@@ -17,14 +17,17 @@ const AddComment = ({ doc }) => {
   }
   return (
     <div>
-      <form type='submit' onSubmit={handleSubmit}>
+      <form type='submit' onSubmit={handleSubmit} className='flex gap-x-2 mb-2'>
         <input
           type='text'
           placeholder='add comment'
           value={input}
           onChange={(e) => handleChange(e)}
+          className='w-[300px]'
         />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='bg-green-600 pl-2 pr-2'>
+          Submit
+        </button>
       </form>
     </div>
   )

@@ -30,9 +30,9 @@ import BrowseCategories from '../components/BrowseCategories'
 import { useState } from 'react'
 import BrowseArtContainer from '../components/BrowseArtContainer'
 
-const LIMIT = 2
+const LIMIT = 6
 const Browse = () => {
-  const db = getFirestore(app)
+  const { db } = useArtContext()
   const [category, setCategory] = useState('all')
   const [categories] = useCollectionOnce(collection(db, 'categories'))
   const [page, setPage] = useState(1)
@@ -45,7 +45,7 @@ const Browse = () => {
     collection(db, 'art'),
     where('category', '==', category),
     orderBy('dateMS'),
-    limit(2)
+    limit(LIMIT)
   )
   const [all, setAll] = useState(allInitial)
   const [filtered, setFiltered] = useState(filteredInitial)
@@ -85,13 +85,15 @@ const Browse = () => {
     if (page === 1) {
       return
     }
+    setPage(page - 1)
     const firstVisible = value.docs[0]
-    setAll(query(allInitial, endBefore(firstVisible)))
-    setFiltered(query(filteredInitial, endBefore(firstVisible)))
-    setPage(() => page - 1)
+    setAll(query(allInitial, endBefore(firstVisible), limitToLast(LIMIT)))
+    setFiltered(
+      query(filteredInitial, endBefore(firstVisible), limitToLast(LIMIT))
+    )
   }
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center pb-4 gap-y-2'>
       <BrowseCategories
         setCategory={setCategory}
         category={category}
@@ -101,9 +103,12 @@ const Browse = () => {
         setPage={setPage}
       />
       {/* {loading && <p>Loading...</p>} */}
+      <div className='flex gap-x-4'>
+        <button onClick={prevPage}>{'<'}</button>
+        <p>{page}</p>
+        <button onClick={nextPage}>{'>'}</button>
+      </div>
       <BrowseArtContainer value={value} loading={loading} />
-      <button onClick={prevPage}>Prev Page</button>
-      <button onClick={nextPage}>Next Page</button>
     </div>
   )
 }

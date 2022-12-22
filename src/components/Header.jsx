@@ -11,6 +11,7 @@ const Header = () => {
         <Link to='/browse'>Browse</Link>
         {user && <Link to={`/profile/${user.uid}`}>Profile</Link>}
         {user && <Link to={'/upload'}>Upload</Link>}
+        {user && <Link to={'/profile/edit'}>Edit Profile</Link>}
         <button
           onClick={user ? signOut : signIn}
           className='bg-green-800 pl-2 pr-2 text-white'

@@ -7,6 +7,8 @@ import Profile from './pages/Profile'
 import Upload from './pages/Upload'
 import NotFound from './pages/NotFound'
 import ArtPage from './pages/ArtPage'
+import EditProfile from './pages/EditProfile'
+import ProtectedRoute from './pages/ProtectedRoute'
 function App() {
   return (
     <div className='h-screen'>
@@ -19,6 +21,14 @@ function App() {
             <Route path='upload' element={<Upload />} />
             <Route path='art/:art' element={<ArtPage />} />
           </Route>
+          <Route
+            path='/profile/edit'
+            element={
+              <ProtectedRoute>
+                <EditProfile />
+              </ProtectedRoute>
+            }
+          />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

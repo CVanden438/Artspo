@@ -10,7 +10,7 @@ import { useCollection } from 'react-firebase-hooks/firestore'
 import { useAuthContext } from '../firebase/auth'
 import app from '../firebase/firebase.config'
 import ArtCard from './ArtCard'
-
+import BrowseArtCard from './BrowseArtCard'
 const ProfileArt = ({ art }) => {
   //   const [value, loading, error] = useCollection(
   //     query(collection(db, 'art'), where('uid', '==', user.uid))
@@ -18,7 +18,7 @@ const ProfileArt = ({ art }) => {
   return (
     <div className='grid grid-cols-5 gap-4'>
       {art?.docs.map((doc) => {
-        return <ArtCard key={doc.id} data={doc.data()} id={doc.id} />
+        return <BrowseArtCard key={doc.id} data={doc.data()} id={doc.id} />
       })}
     </div>
   )

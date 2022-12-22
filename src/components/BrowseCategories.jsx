@@ -2,6 +2,7 @@ import React from 'react'
 import { useCollectionOnce } from 'react-firebase-hooks/firestore'
 import app from '../firebase/firebase.config'
 import { getFirestore, collection } from 'firebase/firestore'
+import { useArtContext } from '../firebase/db'
 
 const BrowseCategories = ({
   setCategory,
@@ -11,7 +12,7 @@ const BrowseCategories = ({
   categories,
   setPage,
 }) => {
-  const db = getFirestore(app)
+  const { db } = useArtContext()
   // const [categories] = useCollectionOnce(collection(db, 'categories'))
   const handleClick = (id) => {
     setCategory(id)
@@ -20,7 +21,7 @@ const BrowseCategories = ({
     setPage(1)
   }
   return (
-    <div className='flex gap-x-4 mt-6 mb-6'>
+    <div className='flex gap-x-4 mt-6'>
       {categories &&
         categories.docs.map((cat) => {
           return (
@@ -29,7 +30,7 @@ const BrowseCategories = ({
               onClick={() => handleClick(cat.id)}
               className={`${
                 category === cat.id ? 'bg-green-600' : 'bg-green-300'
-              } pl-4 pr-4 pt-2 pb-2 hover:bg-green-400 transition-all`}
+              } pl-4 pr-4 pt-2 pb-2 hover:bg-green-400 active:bg-green-600 transition-all hover:scale-125 ease-in-out duration-500`}
             >
               {cat.id}
               <span className='mr-2'></span>

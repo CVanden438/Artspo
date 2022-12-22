@@ -17,10 +17,11 @@ import {
 } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import app from '../firebase/firebase.config'
+import { useArtContext } from '../firebase/db'
 const Profile = () => {
   const [isModalOpen, setisModalOpen] = useState(false)
   const params = useParams()
-  const db = getFirestore(app)
+  const { db } = useArtContext()
   const [value, loading, error] = useCollection(
     query(collection(db, 'art'), where('uid', '==', params.user))
   )
