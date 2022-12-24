@@ -12,8 +12,8 @@ const BrowseArtCard = ({ data, id, del }) => {
   const { likeArt, favouriteArt, db } = useArtContext()
   const { user } = useAuthContext()
   const artRef = collection(doc(db, 'art', id), 'likes')
-  async function handleLike(id) {
-    await likeArt(id)
+  async function handleLike(id, uid) {
+    await likeArt(id, uid)
     const hasLiked = await getDoc(doc(artRef, user?.uid))
     setLiked(hasLiked.exists())
   }
@@ -57,7 +57,7 @@ const BrowseArtCard = ({ data, id, del }) => {
       </div>
       <div className='flex justify-between gap-x-2'>
         <button
-          onClick={() => handleLike(id)}
+          onClick={() => handleLike(id, data.uid)}
           className={`w-[70px]  transition-all flex justify-between pl-2 pr-2 rounded-lg ${
             liked ? 'bg-blue-400' : 'bg-green-600'
           }`}

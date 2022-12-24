@@ -16,7 +16,7 @@ const ProfileArt = ({ art }) => {
   //     query(collection(db, 'art'), where('uid', '==', user.uid))
   //   )
   return (
-    <div className='grid grid-cols-5 gap-4'>
+    <div className='grid grid-cols-5 gap-4 pl-2 pr-2'>
       {art?.docs.map((doc) => {
         return <BrowseArtCard key={doc.id} data={doc.data()} id={doc.id} />
       })}

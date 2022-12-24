@@ -21,8 +21,13 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
     setIsModalOpen(false)
   }
   return (
-    <div>
-      <form action='submit' onSubmit={handleSubmit}>
+    <div className='flex justify-center w-full h-full absolute mx-auto mt-40'>
+      <form
+        action='submit'
+        onSubmit={handleSubmit}
+        className='flex flex-col bg-green-400 h-[220px] w-[300px] p-6'
+      >
+        <label htmlFor='title'>Title:</label>
         <input
           type='text'
           placeholder='title'
@@ -30,6 +35,7 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
           onChange={handleChange}
           value={input.title}
         />
+        <label htmlFor='description'>Description:</label>
         <textarea
           type='text'
           placeholder='description'
@@ -37,7 +43,12 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
           onChange={handleChange}
           value={input.description}
         />
-        <button type='submit'>Submit</button>
+        <button
+          type='submit'
+          className='bg-green-600 rounded-lg w-1/2 mx-auto mt-4'
+        >
+          Submit
+        </button>
       </form>
     </div>
   )

@@ -2,31 +2,44 @@ import React, { useState } from 'react'
 import { useArtContext } from '../../firebase/db'
 import { Link } from 'react-router-dom'
 import EditArtModal from './EditArtModal'
-const EditArtCard = ({ data, id }) => {
+const EditArtCard = ({ data, id, removeFav }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { deleteArt, removeFav } = useArtContext()
+  const { deleteArt } = useArtContext()
   return (
     <div className='hover:bg-green-400 flex flex-col p-2 bg-green-300 h-fit'>
       <Link to={`/art/${id}`}>
         <img src={data.image} alt='' />
       </Link>
-      <h2 className='font-bold'>{data.title}</h2>
-      <p className='text-gray-400'>{data?.description.slice(0, 40)}</p>
-      <button onClick={() => removeFav(id)}>Remove</button>
-      <button
-        onClick={() => {
-          setIsModalOpen(true)
-        }}
-      >
-        Edit
-      </button>
-      <button
-        onClick={() => {
-          deleteArt(data, id)
-        }}
-      >
-        Delete
-      </button>
+      <h2 className='font-bold truncate'>{data.title}</h2>
+      <p className='text-gray-400 truncate'>{data?.description.slice(0, 40)}</p>
+      {removeFav && (
+        <button
+          onClick={() => removeFav(id)}
+          className='bg-green-600 rounded-lg w-1/2 m-auto'
+        >
+          Remove Favourite
+        </button>
+      )}
+      {!removeFav && (
+        <div className='flex justify-between'>
+          <button
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
+            className='bg-green-600 rounded-lg w-[50px]'
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => {
+              deleteArt(data, id)
+            }}
+            className='bg-red-500 rounded-lg w-[60px]'
+          >
+            Delete
+          </button>
+        </div>
+      )}
       {isModalOpen && (
         <EditArtModal setIsModalOpen={setIsModalOpen} data={data} id={id} />
       )}

@@ -55,13 +55,19 @@ const Profile = () => {
   // console.log('userFavs', userFavs)
   return (
     <div className='p-5 grid grid-cols-6 gap-4 bg-green-100'>
-      <div className='bg-green-200 flex flex-col items-center'>
+      <div className='bg-green-200 flex flex-col items-center justify-center'>
         <ProfileCard user={userValue} />
       </div>
       <div className='bg-green-200 col-span-5'>
+        <p className='flex justify-center font-bold mb-2 underline'>
+          User's Favourites:
+        </p>
         <ProfileFavourites favourites={userFavs} />
       </div>
       <div className='col-span-6 bg-green-200'>
+        <p className='flex justify-center font-bold mb-2 underline'>
+          User's Creations:
+        </p>
         <ProfileArt art={value} />
         {isModalOpen && <ArtModal setisModalOpen={setisModalOpen} />}
       </div>

@@ -44,6 +44,9 @@ const ArtProvider = ({ children }) => {
     //const artRef = String(ref(storage, path))
     const artURL = await getDownloadURL(ref(storage, path))
     const artURLString = String(artURL)
+    await updateDoc(doc(db, 'users', user.uid), {
+      totalArt: increment(1),
+    })
     await addDoc(collection(db, 'art'), {
       title: input.title,
       description: input.description,
@@ -74,6 +77,9 @@ const ArtProvider = ({ children }) => {
     await removeCatCount('all')
     const artRef = doc(db, 'art', id)
     await deleteDoc(artRef)
+    await updateDoc(doc(db, 'users', user.uid), {
+      totalArt: increment(-1),
+    })
   }
 
   async function editArt(data, id) {
@@ -121,17 +127,23 @@ const ArtProvider = ({ children }) => {
     })
   }
 
-  async function likeArt(id) {
+  async function likeArt(id, uid) {
     const artRef = collection(doc(db, 'art', id), 'likes')
     const hasLiked = await getDoc(doc(artRef, user.uid))
     if (!hasLiked.exists()) {
       await updateDoc(doc(db, 'art', id), {
         likeCount: increment(1),
       })
+      await updateDoc(doc(db, 'users', uid), {
+        totalLikes: increment(1),
+      })
       await setDoc(doc(artRef, user.uid), {})
     } else {
       await updateDoc(doc(db, 'art', id), {
         likeCount: increment(-1),
+      })
+      await updateDoc(doc(db, 'users', uid), {
+        totalLikes: increment(-1),
       })
       await deleteDoc(doc(artRef, user.uid))
     }

@@ -97,10 +97,7 @@ const Upload = () => {
             value={file?.filename}
             onChange={(e) => handleFileChange(e)}
           />
-          <button
-            type='submit'
-            className='bg-green-400 hover:bg-green-500 active:bg-green-600 transition-all'
-          >
+          <button type='submit' className='bg-green-600 transition-all'>
             Add Art
           </button>
           {alert && (
