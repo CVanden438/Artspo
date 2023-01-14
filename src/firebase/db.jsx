@@ -1,4 +1,4 @@
-import app from './firebase.config'
+import app from './firebase-config'
 import React, { useContext, useState } from 'react'
 import {
   getFirestore,

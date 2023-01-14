@@ -16,7 +16,7 @@ import {
   documentId,
 } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import { useArtContext } from '../firebase/db'
 const Profile = () => {
   const [isModalOpen, setisModalOpen] = useState(false)

@@ -8,7 +8,7 @@ import {
 import React from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { useAuthContext } from '../firebase/auth'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import ArtCard from './ArtCard'
 import BrowseArtCard from './BrowseArtCard'
 const ProfileArt = ({ art }) => {

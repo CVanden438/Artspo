@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAuthContext } from '../firebase/auth'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import {
   getFirestore,
   collection,

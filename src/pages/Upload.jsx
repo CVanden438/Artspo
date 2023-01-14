@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useArtContext } from '../firebase/db'
 import { useAuthContext } from '../firebase/auth'
 import { collection, getDocs, getFirestore } from 'firebase/firestore'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import { useCollectionOnce } from 'react-firebase-hooks/firestore'
 import Alert from '../components/Alert'
 const initialState = {

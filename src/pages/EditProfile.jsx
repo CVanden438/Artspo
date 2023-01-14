@@ -4,7 +4,7 @@ import {
   useCollectionOnce,
 } from 'react-firebase-hooks/firestore'
 import { useAuthContext } from '../firebase/auth'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import { getFirestore, collection, where, query } from 'firebase/firestore'
 import EditProfileArt from '../components/editprofile/EditProfileArt'
 import EditProfileCard from '../components/editprofile/EditProfileCard'

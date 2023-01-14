@@ -9,7 +9,7 @@ import {
 } from 'firebase/firestore'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import { useCollection, useDocumentOnce } from 'react-firebase-hooks/firestore'
 import AddComment from '../components/AddComment'
 import Comment from '../components/Comment'

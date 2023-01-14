@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore'
-import app from './firebase.config'
+import app from './firebase-config'
 const provider = new GoogleAuthProvider()
 const auth = getAuth()
 const AuthContext = React.createContext()

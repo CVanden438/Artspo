@@ -3,7 +3,7 @@ import {
   useCollection,
   useCollectionOnce,
 } from 'react-firebase-hooks/firestore'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import {
   getFirestore,
   collection,

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import app from './firebase/firebase.config'
+import app from './firebase/firebase-config'
 import Layout from './pages/Layout'
 import Landing from './pages/Landing'
 import Browse from './pages/Browse'

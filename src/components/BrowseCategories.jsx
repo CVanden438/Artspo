@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCollectionOnce } from 'react-firebase-hooks/firestore'
-import app from '../firebase/firebase.config'
+import app from '../firebase/firebase-config'
 import { getFirestore, collection } from 'firebase/firestore'
 import { useArtContext } from '../firebase/db'
 
