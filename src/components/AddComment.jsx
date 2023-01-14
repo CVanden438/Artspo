@@ -6,9 +6,12 @@ import { useArtContext } from '../firebase/db'
 const AddComment = ({ doc }) => {
   const [input, setInput] = useState('')
   const { addComment } = useArtContext()
-  const { user } = useAuthContext()
+  const { user, signIn } = useAuthContext()
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!user) {
+      return signIn()
+    }
     if (!input || input.length === 0) {
       return
     }

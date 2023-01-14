@@ -10,14 +10,20 @@ const BrowseArtCard = ({ data, id, del }) => {
   const [liked, setLiked] = useState(false)
   const [favourited, setFavourited] = useState(false)
   const { likeArt, favouriteArt, db } = useArtContext()
-  const { user } = useAuthContext()
+  const { user, signIn } = useAuthContext()
   const artRef = collection(doc(db, 'art', id), 'likes')
   async function handleLike(id, uid) {
+    if (!user) {
+      return signIn()
+    }
     await likeArt(id, uid)
     const hasLiked = await getDoc(doc(artRef, user?.uid))
     setLiked(hasLiked.exists())
   }
   async function handleFavourite(id) {
+    if (!user) {
+      return signIn()
+    }
     await favouriteArt(id)
     setFavourited(true)
   }
