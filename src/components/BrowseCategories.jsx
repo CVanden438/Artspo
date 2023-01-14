@@ -21,7 +21,7 @@ const BrowseCategories = ({
     setPage(1)
   }
   return (
-    <div className='flex gap-x-4 mt-6'>
+    <div className='flex gap-x-4 mt-6 mb-2'>
       {categories &&
         categories.docs.map((cat) => {
           return (
@@ -29,8 +29,10 @@ const BrowseCategories = ({
               key={cat.id}
               onClick={() => handleClick(cat.id)}
               className={`${
-                category === cat.id ? 'bg-green-600' : 'bg-green-300'
-              } pl-4 pr-4 pt-2 pb-2 hover:bg-green-400 active:bg-green-600 transition-all hover:scale-125 ease-in-out duration-500`}
+                category === cat.id
+                  ? 'bg-indigo-400'
+                  : 'bg-indigo-800 hover:bg-indigo-400'
+              } pl-4 pr-4 text-white pt-2 pb-2 transition-all hover:scale-125 ease-in-out duration-500`}
             >
               {cat.id}
               <span className='mr-2'></span>

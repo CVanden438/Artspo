@@ -9,6 +9,9 @@ const AddComment = ({ doc }) => {
   const { user } = useAuthContext()
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!input || input.length === 0) {
+      return
+    }
     addComment(doc, user, input)
     setInput('')
   }
@@ -16,16 +19,16 @@ const AddComment = ({ doc }) => {
     setInput(e.target.value)
   }
   return (
-    <div>
+    <div className=''>
       <form type='submit' onSubmit={handleSubmit} className='flex gap-x-2 mb-2'>
         <input
           type='text'
           placeholder='add comment'
           value={input}
           onChange={(e) => handleChange(e)}
-          className='w-[300px]'
+          className='w-full text-black'
         />
-        <button type='submit' className='bg-green-600 pl-2 pr-2'>
+        <button type='submit' className='bg-indigo-600 pl-2 pr-2'>
           Submit
         </button>
       </form>

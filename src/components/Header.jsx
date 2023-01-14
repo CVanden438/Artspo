@@ -5,7 +5,7 @@ const Header = () => {
   const { signOut, user, signIn } = useAuthContext()
 
   return (
-    <header className='bg-green-600 h-12 flex items-center justify-between pl-4 pr-4 font-bold'>
+    <header className='bg-gradient-to-r from-indigo-900 via-[#090328] to-indigo-900 h-12 flex items-center justify-between pl-4 pr-4 font-bold'>
       <Link to='/'>Artspo</Link>
       <div className='flex gap-x-6'>
         <Link to='/browse'>Browse</Link>
@@ -14,7 +14,7 @@ const Header = () => {
         {user && <Link to={'/profile/edit'}>Edit Profile</Link>}
         <button
           onClick={user ? signOut : signIn}
-          className='bg-green-800 pl-2 pr-2 text-white'
+          className='bg-indigo-600 pl-2 pr-2 text-white'
         >
           {user ? 'Logout' : 'Login'}
         </button>

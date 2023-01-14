@@ -28,18 +28,23 @@ const ArtPage = () => {
     )
   )
   return (
-    <div className='flex align-middle justify-center pt-16'>
-      <div className='flex p-6 justify-center gap-4 bg-green-300'>
-        <div className='h-[600px] w-[600px] flex items-center bg-green-400'>
-          <img
-            src={snap?.data().image}
-            alt=''
-            className='aspect-square object-contain'
-          />
+    <div className='flex align-middle justify-center pb-10'>
+      <div className='flex flex-col items-center gap-4 p-2 w-3/4'>
+        <p className='font-bold text-2xl'>{snap?.data().title}</p>
+        <img src={snap?.data().image} alt='' className='' />
+        <div className='w-full gap-1 flex flex-col'>
+          <p className='text-white/70'>{snap?.data().category}</p>
+          <p>{snap?.data().description}</p>
+          <p>{snap?.data().date.slice(0, 10)}</p>
+          <div className='flex justify-between'>
+            <p>Likes: {snap?.data().likeCount}</p>
+            <p>Favourites: {snap?.data().favourites?.length ?? '0'}</p>
+            <p>Comments: {value?.docs.length}</p>
+          </div>
         </div>
-        <div className='h-[600px]'>
+        <div className='w-full'>
           <AddComment doc={params.art} />
-          <div className='overflow-y-auto overflow-x-hidden h-[560px]'>
+          <div className='overflow-y-auto overflow-x-hidden'>
             {value &&
               value.docs.map((c) => {
                 return <Comment key={c.id} data={c.data()} />

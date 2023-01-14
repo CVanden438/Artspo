@@ -34,14 +34,14 @@ const BrowseArtCard = ({ data, id, del }) => {
     }
   }, [])
   return (
-    <div className='hover:bg-green-400 flex flex-col p-2 gap-y-[2px] bg-green-300 h-fit'>
+    <div className=' flex flex-col hover:outline outline-1 p-1 gap-y-[2px]  h-fit'>
       <Link to={`/art/${id}`} className='relative'>
         <img
           src={data.image}
           alt=''
           className='w-full aspect-square object-cover'
         />
-        <p className='absolute bg-green-200 right-[5px] bottom-[5px] pl-2 pr-2'>
+        <p className='absolute bg-indigo-800 right-[5px] bottom-[5px] pl-2 pr-2'>
           {data.category}
         </p>
         <div className='absolute bg-black w-full h-full top-0 opacity-0 hover:opacity-50 text-white flex items-center justify-center'>
@@ -58,8 +58,8 @@ const BrowseArtCard = ({ data, id, del }) => {
       <div className='flex justify-between gap-x-2'>
         <button
           onClick={() => handleLike(id, data.uid)}
-          className={`w-[70px]  transition-all flex justify-between pl-2 pr-2 rounded-lg ${
-            liked ? 'bg-blue-400' : 'bg-green-600'
+          className={`w-[60px] transition-all flex justify-between pl-2 pr-2 ${
+            liked ? 'bg-indigo-400 outline outline-1' : 'bg-indigo-500'
           }`}
         >
           <BiLike className={`h-6 w-6`} />
@@ -67,8 +67,8 @@ const BrowseArtCard = ({ data, id, del }) => {
         </button>
         <button
           onClick={() => handleFavourite(id)}
-          className={`w-[150px] transition duration-500 rounded-lg ${
-            favourited ? 'bg-orange-400' : 'bg-green-600'
+          className={`w-[150px] transition duration-500 ${
+            favourited ? 'bg-indigo-400 outline outline-1' : 'bg-cyan-600'
           }`}
         >
           {favourited ? 'Favourited!' : 'Add To Favourites'}
