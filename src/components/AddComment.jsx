@@ -28,7 +28,7 @@ const AddComment = ({ doc }) => {
           onChange={(e) => handleChange(e)}
           className='w-full text-black'
         />
-        <button type='submit' className='bg-indigo-600 pl-2 pr-2'>
+        <button type='submit' className='bg-main-4 hover:bg-main-3 pl-2 pr-2'>
           Submit
         </button>
       </form>

@@ -51,6 +51,7 @@ const ArtProvider = ({ children }) => {
       title: input.title,
       description: input.description,
       uid: user.uid,
+      name: user.displayName,
       likeCount: 0,
       image: artURLString,
       path: path,

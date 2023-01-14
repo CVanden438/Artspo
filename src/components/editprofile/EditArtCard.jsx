@@ -6,7 +6,7 @@ const EditArtCard = ({ data, id, removeFav }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { deleteArt } = useArtContext()
   return (
-    <div className='hover:bg-green-400 flex flex-col p-2 bg-green-300 h-fit'>
+    <div className='hover:border flex flex-col p-2 bg-main-2 h-fit'>
       <Link to={`/art/${id}`}>
         <img src={data.image} alt='' />
       </Link>
@@ -15,7 +15,7 @@ const EditArtCard = ({ data, id, removeFav }) => {
       {removeFav && (
         <button
           onClick={() => removeFav(id)}
-          className='bg-green-600 rounded-lg w-1/2 m-auto'
+          className='bg-violet-600 rounded-lg w-1/2 m-auto'
         >
           Remove Favourite
         </button>

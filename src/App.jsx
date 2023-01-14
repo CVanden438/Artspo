@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<Landing />} />
+            <Route index element={<Browse />} />
             <Route path='browse' element={<Browse />} />
             <Route path='profile/:user' element={<Profile />} />
             <Route path='upload' element={<Upload />} />

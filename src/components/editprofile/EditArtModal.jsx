@@ -25,7 +25,7 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
       <form
         action='submit'
         onSubmit={handleSubmit}
-        className='flex flex-col bg-green-400 h-[220px] w-[300px] p-6'
+        className='flex flex-col bg-main-3 h-[220px] w-[300px] p-6'
       >
         <label htmlFor='title'>Title:</label>
         <input
@@ -34,6 +34,7 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
           name='title'
           onChange={handleChange}
           value={input.title}
+          className='text-black'
         />
         <label htmlFor='description'>Description:</label>
         <textarea
@@ -42,10 +43,11 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
           name='description'
           onChange={handleChange}
           value={input.description}
+          className='text-black'
         />
         <button
           type='submit'
-          className='bg-green-600 rounded-lg w-1/2 mx-auto mt-4'
+          className='bg-main-5 hover:bg-main-4 rounded-lg w-1/2 mx-auto mt-4'
         >
           Submit
         </button>

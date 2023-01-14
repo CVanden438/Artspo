@@ -19,6 +19,7 @@ const Upload = () => {
   const { addArt, fileExists, db } = useArtContext()
   const catRef = collection(db, 'categories')
   const [value, loading, error] = useCollectionOnce(catRef)
+  const [disabled, setDisabled] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (input.category === 'category') {
@@ -28,15 +29,23 @@ const Upload = () => {
       return
     }
     try {
+      setDisabled(true)
       await addArt(input, file)
       setInput(initialState)
       setFile('')
       setURL('')
       setAlert(true)
       setAlertType('success')
+      setTimeout(() => {
+        setAlert(false)
+        setDisabled(false)
+      }, 3000)
     } catch (error) {
       console.log('error')
       setAlert(true)
+      setTimeout(() => {
+        setAlert(false)
+      }, 5000)
       setAlertType('error')
     }
   }
@@ -55,11 +64,11 @@ const Upload = () => {
   }
   return (
     <div className='flex justify-center align-middle pt-20'>
-      <div className='flex gap-x-6 p-6 justify-center bg-green-400 w-1/2'>
+      <div className='flex gap-x-6 p-6 justify-center bg-main-3 w-1/2'>
         <form
           action='submit'
           onSubmit={handleSubmit}
-          className='flex flex-col gap-y-4 w-1/2'
+          className='flex flex-col gap-y-4 w-1/2 text-black'
         >
           <input
             type='text'
@@ -96,8 +105,13 @@ const Upload = () => {
             //name='filename'
             value={file?.filename}
             onChange={(e) => handleFileChange(e)}
+            className='text-white'
           />
-          <button type='submit' className='bg-green-600 transition-all'>
+          <button
+            type='submit'
+            className='bg-main-5 hover:bg-main-4 text-white transition-all'
+            disabled={disabled}
+          >
             Add Art
           </button>
           {alert && (
@@ -114,7 +128,7 @@ const Upload = () => {
           {fileExists && <p className='bg-red-400'>File already exists!</p>}
           {/* <Alert message={'test'} type={'error'} /> */}
         </form>
-        <div className='bg-green-300 w-1/2 aspect-square'>
+        <div className='bg-main-1 w-1/2 aspect-square'>
           Preview:
           {url && (
             <img

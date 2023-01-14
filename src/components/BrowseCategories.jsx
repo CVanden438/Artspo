@@ -29,9 +29,7 @@ const BrowseCategories = ({
               key={cat.id}
               onClick={() => handleClick(cat.id)}
               className={`${
-                category === cat.id
-                  ? 'bg-indigo-400'
-                  : 'bg-indigo-800 hover:bg-indigo-400'
+                category === cat.id ? 'bg-main-6' : 'bg-main-4 hover:bg-main-6'
               } pl-4 pr-4 text-white pt-2 pb-2 transition-all hover:scale-125 ease-in-out duration-500`}
             >
               {cat.id}

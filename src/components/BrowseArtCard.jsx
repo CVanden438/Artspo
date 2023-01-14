@@ -22,13 +22,15 @@ const BrowseArtCard = ({ data, id, del }) => {
     setFavourited(true)
   }
   useEffect(() => {
-    getDoc(doc(artRef, user?.uid)).then((result) => {
-      setLiked(result.exists())
-    })
-    if (data.favourites) {
-      for (let i of data.favourites) {
-        if (i === user?.uid) {
-          setFavourited(true)
+    if (user) {
+      getDoc(doc(artRef, user?.uid)).then((result) => {
+        setLiked(result.exists())
+      })
+      if (data.favourites) {
+        for (let i of data.favourites) {
+          if (i === user?.uid) {
+            setFavourited(true)
+          }
         }
       }
     }
@@ -49,17 +51,17 @@ const BrowseArtCard = ({ data, id, del }) => {
         </div>
       </Link>
       <h2 className='font-bold'>{data.title}</h2>
-      <p className='text-gray-600 truncate'>{data.description}</p>
+      <p className='text-white/70 truncate'>{data.description}</p>
       {/* <p>Likes: {data.likeCount}</p> */}
       <div className='flex justify-between'>
-        <Link to={`/profile/${data.uid}`}>Profile</Link>
+        <Link to={`/profile/${data.uid}`}>{data.name}</Link>
         <p>{data.date?.slice(0, 10)}</p>
       </div>
       <div className='flex justify-between gap-x-2'>
         <button
           onClick={() => handleLike(id, data.uid)}
           className={`w-[60px] transition-all flex justify-between pl-2 pr-2 ${
-            liked ? 'bg-indigo-400 outline outline-1' : 'bg-indigo-500'
+            liked ? 'bg-main-4/50 outline outline-1' : 'bg-main-3/50'
           }`}
         >
           <BiLike className={`h-6 w-6`} />
