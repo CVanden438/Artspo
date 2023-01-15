@@ -36,6 +36,7 @@ const Browse = () => {
   const [category, setCategory] = useState('all')
   const [categories] = useCollectionOnce(collection(db, 'categories'))
   const [page, setPage] = useState(1)
+  const { user } = useAuthContext()
   const allInitial = query(
     collection(db, 'art'),
     orderBy('dateMS'),
@@ -93,23 +94,30 @@ const Browse = () => {
     )
   }
   return (
-    <div className='flex flex-col items-center pb-4 gap-y-2'>
-      <BrowseCategories
-        setCategory={setCategory}
-        category={category}
-        updateFiltered={updateFiltered}
-        updateAll={updateAll}
-        categories={categories}
-        setPage={setPage}
-      />
-      {/* {loading && <p>Loading...</p>} */}
-      <div className='flex gap-x-4'>
-        <button onClick={prevPage}>{'<'}</button>
-        <p>{page}</p>
-        <button onClick={nextPage}>{'>'}</button>
+    <>
+      {!user && (
+        <p className='p-2 rounded-md bg-main-3 w-1/2 m-auto text-center mt-4'>
+          Login with Google to start uploading and interacting!
+        </p>
+      )}
+      <div className='flex flex-col items-center pb-4 gap-y-2'>
+        <BrowseCategories
+          setCategory={setCategory}
+          category={category}
+          updateFiltered={updateFiltered}
+          updateAll={updateAll}
+          categories={categories}
+          setPage={setPage}
+        />
+        {/* {loading && <p>Loading...</p>} */}
+        <div className='flex gap-x-4'>
+          <button onClick={prevPage}>{'<'}</button>
+          <p>{page}</p>
+          <button onClick={nextPage}>{'>'}</button>
+        </div>
+        <BrowseArtContainer value={value} loading={loading} />
       </div>
-      <BrowseArtContainer value={value} loading={loading} />
-    </div>
+    </>
   )
 }
 //p-4 grid grid-cols-3 gap-y-6 gap-x-5

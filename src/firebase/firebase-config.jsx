@@ -6,8 +6,9 @@ import { getStorage } from 'firebase/storage'
 // const storageBucket = import.meta.env.VITE_STORAGEBUCKET
 // const messagingSenderId = import.meta.env.VITE_MESSAGINGSENDERID
 // const appId = import.meta.env.VITE_APPID
+// const key = import.meta.env.VITE_APIKEY
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_APIKEY,
+  apiKey: 'AIzaSyBqIxFBycHMyyGxsCg2VMlTcsjhwesdG_c',
 
   authDomain: 'artspo-bfdef.firebaseapp.com',
 
