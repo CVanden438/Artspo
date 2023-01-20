@@ -36,7 +36,7 @@ const ArtPage = () => {
           </p>
           <img src={snap?.data().image} alt='' className='' />
         </div>
-        <div className='w-1/3'>
+        <div className='w-full md:w-1/2'>
           <div className='w-full gap-2 flex flex-col'>
             <div className='flex justify-between'>
               <Link to={`/profile/${snap?.data().uid}`}>
