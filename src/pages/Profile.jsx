@@ -55,10 +55,10 @@ const Profile = () => {
   // console.log('userFavs', userFavs)
   return (
     <div className='p-5 grid grid-cols-6 gap-4'>
-      <div className='bg-main-2 flex flex-col items-center justify-center'>
+      <div className='bg-main-2 col-span-6 md:col-span-1 flex flex-col items-center justify-center'>
         <ProfileCard user={userValue} />
       </div>
-      <div className='bg-main-2 col-span-5'>
+      <div className='bg-main-2 col-span-6 md:col-span-5'>
         <p className='flex justify-center font-bold pt-1 pb-1 underline'>
           User's Favourites:
         </p>

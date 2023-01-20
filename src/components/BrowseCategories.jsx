@@ -21,7 +21,7 @@ const BrowseCategories = ({
     setPage(1)
   }
   return (
-    <div className='flex gap-x-4 mt-6 mb-2'>
+    <div className='grid  grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 mt-6 mb-2'>
       {categories &&
         categories.docs.map((cat) => {
           return (

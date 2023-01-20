@@ -4,7 +4,7 @@ import EditArtCard from './EditArtCard'
 const EditProfileFavourites = ({ userFavs }) => {
   const { removeFav } = useArtContext()
   return (
-    <div className='grid grid-cols-5 gap-2 border border-black p-2'>
+    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 border border-black p-2'>
       {userFavs &&
         userFavs.docs.map((art) => {
           return (

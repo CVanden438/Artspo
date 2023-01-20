@@ -64,11 +64,11 @@ const Upload = () => {
   }
   return (
     <div className='flex justify-center align-middle pt-20'>
-      <div className='flex gap-x-6 p-6 justify-center bg-main-3 w-1/2'>
+      <div className='grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-2 p-6 justify-center bg-main-3 w-4/5'>
         <form
           action='submit'
           onSubmit={handleSubmit}
-          className='flex flex-col gap-y-4 w-1/2 text-black'
+          className='flex flex-col gap-y-4 w-full text-black'
         >
           <input
             type='text'
@@ -128,7 +128,7 @@ const Upload = () => {
           {fileExists && <p className='bg-red-400'>File already exists!</p>}
           {/* <Alert message={'test'} type={'error'} /> */}
         </form>
-        <div className='bg-main-1 w-1/2 aspect-square'>
+        <div className='bg-main-1 w-full aspect-square'>
           Preview:
           {url && (
             <img
