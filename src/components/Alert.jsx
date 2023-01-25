@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 const Alert = ({ message, type }) => {
-  //const [colour, setColour] = useState('green-600')
   let colour = ''
   if (type === 'success') {
     colour = 'bg-green-400'

@@ -1,7 +1,4 @@
 import React from 'react'
-import { useCollectionOnce } from 'react-firebase-hooks/firestore'
-import app from '../firebase/firebase-config'
-import { getFirestore, collection } from 'firebase/firestore'
 import { useArtContext } from '../firebase/db'
 
 const BrowseCategories = ({
@@ -12,8 +9,6 @@ const BrowseCategories = ({
   categories,
   setPage,
 }) => {
-  const { db } = useArtContext()
-  // const [categories] = useCollectionOnce(collection(db, 'categories'))
   const handleClick = (id) => {
     setCategory(id)
     updateFiltered(id)
@@ -21,7 +16,7 @@ const BrowseCategories = ({
     setPage(1)
   }
   return (
-    <div className='grid  grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 mt-6 mb-2'>
+    <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 mt-6 mb-2'>
       {categories &&
         categories.docs.map((cat) => {
           return (

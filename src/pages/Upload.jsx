@@ -102,7 +102,6 @@ const Upload = () => {
           </select>
           <input
             type='file'
-            //name='filename'
             value={file?.filename}
             onChange={(e) => handleFileChange(e)}
             className='text-white'
@@ -126,7 +125,6 @@ const Upload = () => {
             </p>
           )}
           {fileExists && <p className='bg-red-400'>File already exists!</p>}
-          {/* <Alert message={'test'} type={'error'} /> */}
         </form>
         <div className='bg-main-1 w-full aspect-square'>
           Preview:

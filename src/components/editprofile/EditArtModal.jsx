@@ -10,8 +10,6 @@ const EditArtModal = ({ setIsModalOpen, data, id }) => {
   }
   const [input, setInput] = useState(initialState)
   const { editArt } = useArtContext()
-  // const catRef = collection(db, 'categories')
-  // const [categories, loading, error] = useCollectionOnce(catRef)
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
   }

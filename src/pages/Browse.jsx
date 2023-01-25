@@ -30,7 +30,7 @@ import BrowseCategories from '../components/BrowseCategories'
 import { useState } from 'react'
 import BrowseArtContainer from '../components/BrowseArtContainer'
 
-const LIMIT = 6
+const LIMIT = 8
 const Browse = () => {
   const { db } = useArtContext()
   const [category, setCategory] = useState('all')
@@ -80,7 +80,6 @@ const Browse = () => {
     const lastVisible = value.docs[value.docs.length - 1]
     setAll(query(allInitial, startAfter(lastVisible)))
     setFiltered(query(filteredInitial, startAfter(lastVisible)))
-    // setAll(query(collection(db, 'art'), orderBy('dateMS'), limit(2)))
   }
   async function prevPage() {
     if (page === 1) {
@@ -109,7 +108,6 @@ const Browse = () => {
           categories={categories}
           setPage={setPage}
         />
-        {/* {loading && <p>Loading...</p>} */}
         <div className='flex gap-x-4'>
           <button onClick={prevPage}>{'<'}</button>
           <p>{page}</p>
@@ -120,5 +118,4 @@ const Browse = () => {
     </>
   )
 }
-//p-4 grid grid-cols-3 gap-y-6 gap-x-5
 export default Browse

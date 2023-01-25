@@ -76,7 +76,6 @@ const BrowseArtCard = ({ data, id, del }) => {
       </Link>
       <h2 className='font-bold'>{data.title}</h2>
       <p className='text-white/70 truncate'>{data.description}</p>
-      {/* <p>Likes: {data.likeCount}</p> */}
       <div className='flex justify-between'>
         <Link to={`/profile/${data.uid}`}>{data.name}</Link>
         <p>{data.date?.slice(0, 10)}</p>
@@ -88,7 +87,6 @@ const BrowseArtCard = ({ data, id, del }) => {
             liked ? 'bg-main-4/50 outline outline-1' : 'bg-main-3/50'
           }`}
         >
-          {/* <BiLike className={`h-6 w-6`} /> */}
           <LikeIcon />
           {data.likeCount}
         </button>

@@ -5,16 +5,7 @@ import ProfileCard from '../components/ProfileCard'
 import ProfileArt from '../components/ProfileArt'
 import ProfileFavourites from '../components/ProfileFavourites'
 import { Navigate, useParams } from 'react-router-dom'
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  doc,
-  getDocs,
-  collectionGroup,
-  documentId,
-} from 'firebase/firestore'
+import { collection, query, where } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import app from '../firebase/firebase-config'
 import { useArtContext } from '../firebase/db'
@@ -34,25 +25,6 @@ const Profile = () => {
       where('favourites', 'array-contains', params.user)
     )
   )
-
-  // useCollection(query(collection(db,"art"),where()))
-  // const favs = query(
-  //   collectionGroup(db, 'favourites'),
-  //   where('uid', '==', params.user)
-  // )
-  // const faaavs = getDocs(favs)
-  // const [userFavs, l] = useCollection(favs)
-  // if (l) {
-  //   return <p>Loading.,</p>
-  // }
-  // console.log(userFavs)
-  // console.log('favs', favs)
-  // console.log(
-  //   'test',
-  //   query(collection(db, 'users'), where('uid', '==', params.user))
-  // )
-  // console.log('userValue', userValue)
-  // console.log('userFavs', userFavs)
   return (
     <div className='p-5 grid grid-cols-6 gap-4'>
       <div className='bg-main-2 col-span-6 md:col-span-1 flex flex-col items-center justify-center'>

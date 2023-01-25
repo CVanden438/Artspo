@@ -41,7 +41,6 @@ const ArtProvider = ({ children }) => {
     await uploadArt(file, path)
     await addCatCount(input.category)
     await addCatCount('all')
-    //const artRef = String(ref(storage, path))
     const artURL = await getDownloadURL(ref(storage, path))
     const artURLString = String(artURL)
     await updateDoc(doc(db, 'users', user.uid), {
