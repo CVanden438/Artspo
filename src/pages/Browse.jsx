@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import {
   useCollection,
   useCollectionOnce,
-} from 'react-firebase-hooks/firestore'
-import app from '../firebase/firebase-config'
+} from 'react-firebase-hooks/firestore';
+import app from '../firebase/firebase-config';
 import {
   getFirestore,
   collection,
@@ -22,34 +22,34 @@ import {
   getDocs,
   endBefore,
   limitToLast,
-} from 'firebase/firestore'
-import { useAuthContext } from '../firebase/auth'
-import { useArtContext } from '../firebase/db'
-import BrowseArtCard from '../components/BrowseArtCard'
-import BrowseCategories from '../components/BrowseCategories'
-import { useState } from 'react'
-import BrowseArtContainer from '../components/BrowseArtContainer'
+} from 'firebase/firestore';
+import { useAuthContext } from '../firebase/auth';
+import { useArtContext } from '../firebase/db';
+import BrowseArtCard from '../components/BrowseArtCard';
+import BrowseCategories from '../components/BrowseCategories';
+import { useState } from 'react';
+import BrowseArtContainer from '../components/BrowseArtContainer';
 
-const LIMIT = 8
+const LIMIT = 8;
 const Browse = () => {
-  const { db } = useArtContext()
-  const [category, setCategory] = useState('all')
-  const [categories] = useCollectionOnce(collection(db, 'categories'))
-  const [page, setPage] = useState(1)
-  const { user } = useAuthContext()
+  const { db } = useArtContext();
+  const [category, setCategory] = useState('all');
+  const [categories] = useCollectionOnce(collection(db, 'categories'));
+  const [page, setPage] = useState(1);
+  const { user } = useAuthContext();
   const allInitial = query(
     collection(db, 'art'),
     orderBy('dateMS'),
     limit(LIMIT)
-  )
+  );
   const filteredInitial = query(
     collection(db, 'art'),
     where('category', '==', category),
     orderBy('dateMS'),
     limit(LIMIT)
-  )
-  const [all, setAll] = useState(allInitial)
-  const [filtered, setFiltered] = useState(filteredInitial)
+  );
+  const [all, setAll] = useState(allInitial);
+  const [filtered, setFiltered] = useState(filteredInitial);
   function updateFiltered(cat) {
     setFiltered(
       query(
@@ -58,39 +58,39 @@ const Browse = () => {
         orderBy('dateMS'),
         limit(LIMIT)
       )
-    )
+    );
   }
   function updateAll() {
-    setAll(allInitial)
+    setAll(allInitial);
   }
-  const [value, loading] = useCollection(category === 'all' ? all : filtered)
+  const [value, loading] = useCollection(category === 'all' ? all : filtered);
   async function nextPage() {
-    let check = false
+    let check = false;
     for (let i of categories.docs) {
       if (i.id == category) {
         if (page === Math.ceil(i.data().count / LIMIT)) {
-          check = true
+          check = true;
         }
       }
     }
     if (check === true) {
-      return
+      return;
     }
-    setPage(page + 1)
-    const lastVisible = value.docs[value.docs.length - 1]
-    setAll(query(allInitial, startAfter(lastVisible)))
-    setFiltered(query(filteredInitial, startAfter(lastVisible)))
+    setPage(page + 1);
+    const lastVisible = value.docs[value.docs.length - 1];
+    setAll(query(allInitial, startAfter(lastVisible)));
+    setFiltered(query(filteredInitial, startAfter(lastVisible)));
   }
   async function prevPage() {
     if (page === 1) {
-      return
+      return;
     }
-    setPage(page - 1)
-    const firstVisible = value.docs[0]
-    setAll(query(allInitial, endBefore(firstVisible), limitToLast(LIMIT)))
+    setPage(page - 1);
+    const firstVisible = value.docs[0];
+    setAll(query(allInitial, endBefore(firstVisible), limitToLast(LIMIT)));
     setFiltered(
       query(filteredInitial, endBefore(firstVisible), limitToLast(LIMIT))
-    )
+    );
   }
   return (
     <>
@@ -116,6 +116,6 @@ const Browse = () => {
         <BrowseArtContainer value={value} loading={loading} />
       </div>
     </>
-  )
-}
-export default Browse
+  );
+};
+export default Browse;
